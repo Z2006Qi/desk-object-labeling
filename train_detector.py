@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""第一版训练：从YOLOv8n开始训练mouse和keyboard检测模型。"""
+"""第二轮训练：使用第一轮best.pt在387张数据集上继续训练。"""
 
 from pathlib import Path
 
@@ -9,6 +9,7 @@ from ultralytics import YOLO
 
 PROJECT_DIR = Path(__file__).resolve().parent
 DATA_FILE = PROJECT_DIR / "dataset_final" / "data.yaml"
+BASE_MODEL = PROJECT_DIR / "best.pt"
 CLASS_NAMES = ["mouse", "keyboard"]
 
 
@@ -29,14 +30,17 @@ def main():
             f"当前data.yaml为: {names}"
         )
 
-    model = YOLO("yolov8n.pt")
+    if not BASE_MODEL.is_file():
+        raise FileNotFoundError(f"找不到第一轮模型: {BASE_MODEL}")
+
+    model = YOLO(str(BASE_MODEL))
     model.train(
         data=str(DATA_FILE),
         epochs=100,
         imgsz=640,
         batch=8,
         project=str(PROJECT_DIR / "training_runs"),
-        name="train1_mouse_keyboard",
+        name="retrain_387",
     )
 
 
