@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""第二轮训练：使用第一轮best.pt在387张数据集上继续训练。"""
+"""第三阶段最终训练：使用387张版本的best.pt在580张数据集上继续训练。"""
 
 from pathlib import Path
 
@@ -9,7 +9,7 @@ from ultralytics import YOLO
 
 PROJECT_DIR = Path(__file__).resolve().parent
 DATA_FILE = PROJECT_DIR / "dataset_final" / "data.yaml"
-BASE_MODEL = PROJECT_DIR / "best.pt"
+BASE_MODEL = PROJECT_DIR / "training_runs" / "retrain_387" / "weights" / "best.pt"
 CLASS_NAMES = ["mouse", "keyboard"]
 
 
@@ -31,7 +31,7 @@ def main():
         )
 
     if not BASE_MODEL.is_file():
-        raise FileNotFoundError(f"找不到第一轮模型: {BASE_MODEL}")
+        raise FileNotFoundError(f"找不到第二轮模型: {BASE_MODEL}")
 
     model = YOLO(str(BASE_MODEL))
     model.train(
@@ -40,7 +40,7 @@ def main():
         imgsz=640,
         batch=8,
         project=str(PROJECT_DIR / "training_runs"),
-        name="retrain_387",
+        name="retrain_580",
     )
 
 
