@@ -1,0 +1,11 @@
+# 数据集目录结构示例；实际训练时复制为 dataset_final/data.yaml
+path: /path/to/dataset_final
+train: images/train
+val: images/val
+test: images/test
+
+nc: 2
+names:
+  0: mouse
+  1: keyboard
+
