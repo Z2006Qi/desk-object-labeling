@@ -1,0 +1,32 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Ultralytics and training outputs
+runs/
+training_runs/
+camera_results/
+
+# Local datasets and model weights are distributed through GitHub Releases
+dataset_*/
+labeled_*/
+raw*/
+*.pt
+*.zip
+
+# Generated media and logs
+*.mp4
+*.avi
+*.log
+
+# Editor and OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
